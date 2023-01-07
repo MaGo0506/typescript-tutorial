@@ -1,14 +1,28 @@
 "use strict";
-const anchor = document.querySelector('a');
-// if (anchor) {
-//     console.log(anchor.href)
-// }
-console.log(anchor.href);
-// const form = document.querySelector('form')!;
+// classes
+class Invoice {
+    constructor(c, d, a) {
+        this.client = c;
+        this.details = d;
+        this.amount = a;
+    }
+    format() {
+        return `${this.client} owes $${this.amount} for ${this.details}`;
+    }
+}
+const invOne = new Invoice('Mario', 'car payment', 500);
+const invTwo = new Invoice('Luigi', 'rent', 300);
+const invoices = [];
+invoices.push(invOne, invTwo);
+console.log(invoices);
+// console.log(invOne.format())
+// console.log(invTwo.format())
+invOne.client = 'Yoshi';
+invTwo.amount = 400;
+console.log(invoices);
 const form = document.querySelector('.new-item-form');
-// console.log(form.children)
 // inputs
-const type = document.querySelector('#type'), toFrom = document.querySelector('#toFrom'), details = document.querySelector('#details'), amount = document.querySelector('#amount');
+const type = document.getElementById('type'), toFrom = document.getElementById('toFrom'), details = document.getElementById('details'), amount = document.getElementById('amount');
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     console.log(type.value, toFrom.value, details.value, amount.valueAsNumber);
