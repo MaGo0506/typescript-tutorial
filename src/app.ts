@@ -1,13 +1,14 @@
 // classes
 class Invoice {
-    client: string;
-    details: string;
-    amount: number;
+    // readonly client: string;
+    // private details: string;
+    // public amount: number;
 
-    constructor(c: string, d: string, a: number) {
-        this.client = c;
-        this.details = d;
-        this.amount = a;
+    constructor(
+        readonly client: string,
+        private details: string,
+        public amount: number
+    ) {
     }
 
     format() {
@@ -22,15 +23,9 @@ const invoices: Invoice[] = [];
 
 invoices.push(invOne, invTwo)
 
-console.log(invoices)
-
-// console.log(invOne.format())
-// console.log(invTwo.format())
-
-invOne.client = 'Yoshi'
-invTwo.amount = 400;
-
-console.log(invoices)
+invoices.forEach(invoice => {
+    console.log(invoice.client, invoice.amount, invoice.format())
+})
 
 const form = document.querySelector('.new-item-form') as HTMLFormElement;
 
