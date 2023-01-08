@@ -18,3 +18,21 @@ export class ListTemplate {
         }
     }
 }
+// Generics
+const addUID = (obj) => {
+    let uid = Math.floor(Math.random() * 100);
+    return Object.assign(Object.assign({}, obj), { uid });
+};
+let docOne = addUID({ name: 'yoshi', age: 30 });
+console.log(docOne.age);
+const docThree = {
+    uid: 1,
+    resourceName: 'person',
+    data: { name: 'marko' }
+};
+const docFour = {
+    uid: 2,
+    resourceName: 'shopping list',
+    data: ['bread', 'milk', 'eggs']
+};
+console.log(docThree, docFour);
