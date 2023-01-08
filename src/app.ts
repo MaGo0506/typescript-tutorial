@@ -1,43 +1,32 @@
-// Interfaces
-interface IsPerson {
-    name: string;
-    age: number;
-    speak(text: string): void
-    spend(amount: number): number
-}
-
-const me: IsPerson = {
-    name: 'Marko',
-    age: 22,
-    speak(text: string) : void {
-        console.log(text)
-    },
-    spend(amount: number): number {
-        console.log(`I spent ${amount}`)
-        return amount
-    }
-};
-
-const greetPerson = (person: IsPerson) => {
-    console.log('hello', person.name)
-}
-
-
-console.log(me)
-
 import {Invoice} from './classes/Invoice.js'
+import {Payment} from './classes/Payment.js'
+import {HasFormatter} from "./interfaces/HasFormatter.js";
 
-const invOne = new Invoice('Mario', 'car payment', 500)
-const invTwo = new Invoice('Luigi', 'rent', 300)
+// let docOne: HasFormatter;
+// let docTwo: HasFormatter;
+//
+// docOne = new Invoice('yoshi', 'web work', 250)
+// docTwo = new Payment('mario', 'plumbing work', 200)
+//
+// console.log(docTwo.format())
+//
+// let docs: HasFormatter[] = []
+//
+// docs.push(docOne, docTwo)
 
-const invoices: Invoice[] = [];
-
-invoices.push(invOne, invTwo)
-
-
-invoices.forEach(invoice => {
-    console.log(invoice.client, invoice.amount, invoice.format())
-})
+// console.log(docs)
+//
+// const invOne = new Invoice('Mario', 'car payment', 500)
+// const invTwo = new Invoice('Luigi', 'rent', 300)
+//
+// const invoices: Invoice[] = [];
+//
+// invoices.push(invOne, invTwo)
+//
+//
+// invoices.forEach(invoice => {
+//     console.log(invoice.client, invoice.amount, invoice.format())
+// })
 
 const form = document.querySelector('.new-item-form') as HTMLFormElement;
 
@@ -50,10 +39,12 @@ const type = document.getElementById('type') as HTMLSelectElement,
 form.addEventListener('submit', (e: Event) => {
     e.preventDefault()
 
-    console.log(
-        type.value,
-        toFrom.value,
-        details.value,
-        amount.valueAsNumber
-    )
+    let doc: HasFormatter;
+    if (type.value === 'invoice'){
+        doc = new Invoice(toFrom.value, details.value, amount.valueAsNumber)
+        console.log(doc.format())
+    } else if (type.value === 'payment') {
+        doc = new Payment(toFrom.value, details.value, amount.valueAsNumber)
+        console.log(doc.format())
+    }
 })
